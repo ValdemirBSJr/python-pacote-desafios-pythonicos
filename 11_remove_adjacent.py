@@ -9,8 +9,20 @@ Irá retornar: [1, 2, 3]
 """
 
 def remove_adjacent(nums):
-    # +++ SUA SOLUÇÃO +++
-    return
+    #[lista_unica.append(numero) for numero in nums if numero not in lista_unica]
+    #lista_unica = sorted(set(nums))
+    lista_unica = []
+
+    for i in range(len(nums)):
+        #print(f'Não {nums[i]} {nums[i - 1]} {i}')
+        if not nums[i] == nums[i - 1] or i == 0:
+            lista_unica.append(nums[i])
+            #print(f'caiu {nums[i]} {nums[i - 1]} {i}')
+
+    #list compreension
+    #lista_unica = [nums[i] for i in range(len(nums)) if not nums[i] == nums[i - 1] or i == 0]
+
+    return lista_unica
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
@@ -38,3 +50,5 @@ if __name__ == '__main__':
     test(remove_adjacent, [2, 2, 3, 3, 3], [2, 3])
     test(remove_adjacent, [], [])
     test(remove_adjacent, [2, 2, 3, 3, 3, 2, 2], [2, 3, 2])
+    
+
