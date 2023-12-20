@@ -12,8 +12,12 @@ antes de combina-las.
 """
 
 def front_x(words):
-    # +++ SUA SOLUÇÃO +++
-    return
+    lista_comeca_x = [word for word in words if word[0] == 'x']
+    lista_resto = [word for word in words if not word[0] == 'x']
+    lista_comeca_x.sort()
+    lista_resto.sort()
+    lista_comeca_x.extend(lista_resto)
+    return lista_comeca_x
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
