@@ -49,8 +49,11 @@ Dicas:
 * Use str.split() (sem parêmatros) para fazer separar as palavras.
 * Não construa todo o programade uma vez. Faça por partes executando
 e conferindo cada etapa do seu progresso.
-"""
 
+python.exe .\13_wordcount.py --count letras.txt
+python.exe .\13_wordcount.py --topcount letras.txt
+"""
+import collections
 import sys
 
 
@@ -60,6 +63,69 @@ import sys
 
 # A função abaixo chama print_words() ou print_top() de acordo com os
 # parêtros do programa.
+
+import collections
+
+def print_words(filename):
+    '''
+    primeiro eu crio uma lista que receberá as linhas do arquivo
+    depois leio o arquivo salvando cada linha na lista com as letras em caixa baixa
+    após isso uso um dicionario que receberá as letras e sua frequencia
+    percorro a lista pegando cada item e retirando espaço vazio e quebra de linha
+    depois percorro cada item da lista verificando se o dicionario tem uma chave com o valor da letra
+    caso tenha, incrementa o valor, caso nao tenha recebe o valor padrão de 1
+    por fim imprime as letras e ocorrencias
+
+    Na segunda funcao eu ordeno o dicionario do menor para o maior de acordo com o valor e reverto
+    para trazer do maior para o menor
+
+    :param filename: arquivo que sera lido
+    '''
+    lista_com_as_linhas = []
+    with open(filename.strip(), 'r') as arquivo:
+        for linha in arquivo:
+            lista_com_as_linhas.append(linha.lower())
+
+    #print(lista_com_as_linhas)
+
+    dicionario_contagem = {}
+    for item in lista_com_as_linhas:
+        item_sanitizado = item.replace(' ', '').replace('\n', '')
+        for letra in item_sanitizado:
+            if letra in dicionario_contagem:
+                dicionario_contagem[letra] += 1
+            else:
+                dicionario_contagem[letra] = 1
+
+
+    #print(dicionario_contagem)
+    dicionario_contagem = collections.OrderedDict(sorted(dicionario_contagem.items()))
+    for chave, valor in dicionario_contagem.items():
+        print(f'{chave} {valor}')
+
+
+
+def print_top(filename):
+    lista_com_as_linhas = []
+    with open(filename.strip(), 'r') as arquivo:
+        for linha in arquivo:
+            lista_com_as_linhas.append(linha.lower())
+
+    # print(lista_com_as_linhas)
+
+    dicionario_contagem = {}
+    for item in lista_com_as_linhas:
+        item_sanitizado = item.replace(' ', '').replace('\n', '')
+        for letra in item_sanitizado:
+            if letra in dicionario_contagem:
+                dicionario_contagem[letra] += 1
+            else:
+                dicionario_contagem[letra] = 1
+
+    dicionario_contagem = collections.OrderedDict(sorted(dicionario_contagem.items(), key=lambda x: x[1], reverse=True))
+    for chave, valor in dicionario_contagem.items():
+        print(f'{chave} {valor}')
+
 def main():
     if len(sys.argv) != 3:
         print('Utilização: ./13_wordcount.py {--count | --topcount} file')
