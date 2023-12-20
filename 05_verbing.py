@@ -11,8 +11,13 @@ Retorne o resultado da string.
 """
 
 def verbing(s):
-    # +++ SUA SOLUÇÃO +++
-    return
+    if len(s) < 3:
+        nova_string = s
+    elif s[-3:] == 'ing' and len(s) >=3:
+        nova_string = s + 'ly'
+    elif not s[-3:] == 'ing' and len(s) >=3:
+        nova_string = s + 'ing'
+    return nova_string
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
