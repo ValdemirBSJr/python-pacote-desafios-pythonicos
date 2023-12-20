@@ -1,3 +1,4 @@
+import re
 """
 06. not_bad
 
@@ -10,8 +11,11 @@ Exemplo: 'The dinner is not that bad!' retorna 'The dinner is good!'
 """
 
 def not_bad(s):
-    # +++ SUA SOLUÇÃO +++
-    return
+    nova_string = s
+    if 'not' in s and 'bad' in s:
+        padrao = re.compile('not.*?bad')
+        nova_string = padrao.sub('good', s)
+    return nova_string
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
@@ -39,3 +43,4 @@ if __name__ == '__main__':
     test(not_bad, 'This dinner is not that bad!', 'This dinner is good!')
     test(not_bad, 'This tea is not hot', 'This tea is not hot')
     test(not_bad, "It's bad yet not", "It's bad yet not")
+    test(not_bad, 'This book is not so bad, anyway!', 'This book is good, anyway!')
