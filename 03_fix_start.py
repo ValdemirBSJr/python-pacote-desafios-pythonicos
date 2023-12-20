@@ -14,8 +14,16 @@ onde todas as instancias de stra foram substituidas por strb.
 """
 
 def fix_start(s):
-    # +++ SUA SOLUÇÃO +++
-    return
+    '''
+    Pega uma string passada e ve qual a primeira letra
+    em seguida ve se ela se repete na string, caso se repita, altera para *
+    pula primeira letra para que ele nao a substitua
+    por fim join pra juntar todas as letras
+    :param s: string de entrada
+    :return: retorna a string concatenada a primeira letra da string com o restante dela
+    '''
+    string_alterada = ''.join([caractere if caractere not in s[0] else '*' for caractere in s[1:]])
+    return f'{s[0]}{string_alterada}'
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
