@@ -10,9 +10,24 @@ Exemplo: 'abcde', a metade da frente é 'abc' e a de trás é 'de'.
 Finalmente, dadas duas strings a e b, retorne uma string na forma:
 a-frente + b-frente + a-trás + b-trás
 """
+
+def divide_e_devolve_resto(valor):
+    if len(valor) % 2 == 0:
+        metade_texto = len(valor) // 2
+        parte_1 = valor[:metade_texto]
+        parte_2 = valor[metade_texto:]
+        return parte_1, parte_2
+    else:
+        metade_texto = len(valor) // 2
+        parte_1 = valor[:(metade_texto + 1)]
+        parte_2 = valor[(metade_texto + 1):]
+        return parte_1, parte_2
+
 def front_back(a, b):
-    # +++ SUA SOLUÇÃO +++
-    return
+    valor_1parte1,valor_1parte2  = divide_e_devolve_resto(a)
+    valor_2parte1,valor_2parte2 = divide_e_devolve_resto(b)
+
+    return valor_1parte1 + valor_2parte1 + valor_1parte2 + valor_2parte2
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
