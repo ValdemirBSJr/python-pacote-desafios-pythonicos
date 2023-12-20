@@ -40,30 +40,47 @@ método que escolhe um elemento aleatório de uma lista não vazia.
 """
 
 import random
+import re
 import sys
 
 
-def mimic_dict(filename):
+def mimic_dict(filename) -> dict:
   """Retorna o dicionario imitador mapeando cada palavra para a lista de
   palavras subsequentes."""
-    # +++ SUA SOLUÇÃO +++
-  return
+  dicionario_imitador = {}
+  with open(filename.strip(), 'r') as arquivo:
+    #separa as palavras em uma lista
+    palavras = arquivo.read().split()
+    #se a palavra nao conter caractere especial ela vai
+    palavras = [palavra for palavra in palavras if palavra.isalpha()]
+    #pega cada palavra do texto e salva como chave e as palavras subsequentes vem como valor dessa chave
+    for palavra in range(len(palavras) - 1):
+      dicionario_imitador[palavras[palavra]] = palavras[palavra + 1:]
+
+  #print(dicionario_imitador)
+  return dicionario_imitador
 
 
-def print_mimic(mimic_dict, word):
+def print_mimic(mimic_dict: dict, word: str):
   """Dado o dicionario imitador e a palavra inicial, imprime texto de 200 palavras."""
-    # +++ SUA SOLUÇÃO +++
-  return
+  if mimic_dict.get(word) is not None:
+    print(f'Temos a chave {word} no nosso acervo')
+    print('Gerando trololó...')
+
+    palavras_da_chave = mimic_dict[word]
+    qtde_palavras = len(palavras_da_chave)
+
+    print(random.choices(palavras_da_chave, k=200))
+    #caso nao queira que se repita, usar o random.sample()
+
+  else:
+    print('Não temos esta palavra no nosso acervo.')
 
 
 # Chama mimic_dict() e print_mimic()
 def main():
-  if len(sys.argv) != 2:
-    print('Utilização: ./14_mimic.py file-to-read')
-    sys.exit(1)
-
-  dict = mimic_dict(sys.argv[1])
-  print_mimic(dict, '')
+  dict = mimic_dict('small.txt')
+  print_mimic(dict, 'We')
 
 
 if __name__ == '__main__':
